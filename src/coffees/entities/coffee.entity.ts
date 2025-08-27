@@ -1,6 +1,5 @@
-import { Column } from "typeorm/browser/decorator/columns/Column.js";
-import { PrimaryGeneratedColumn } from "typeorm/browser/decorator/columns/PrimaryGeneratedColumn.js";
-import { Entity } from "typeorm/browser/decorator/entity/Entity.js";
+import { Column, JoinTable, ManyToMany, PrimaryGeneratedColumn, Entity} from "typeorm";
+import { Flavor } from "./flavor.entity";
 
 @Entity()
 export class Coffee {
@@ -13,6 +12,13 @@ export class Coffee {
     @Column()
     brand: string;
 
-    @Column('json', { nullable: true })
-    flavors: string[];
+    @JoinTable()
+    @ManyToMany(
+        type => Flavor, 
+        flavor => flavor.coffees,
+        {
+            cascade: true,
+        }
+    )
+    flavors: Flavor[];
 }
