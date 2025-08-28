@@ -22,9 +22,7 @@ export class CoffeesService {
     private readonly configService: ConfigService,
     @Inject(coffeesConfig.KEY)
     private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>
-  ) {
-    console.log(coffeesConfiguration.foo);
-  }
+  ) {}
 
   findAll(paginationQuery: PaginationQueryDto) {
     const { limit, offset } = paginationQuery;
